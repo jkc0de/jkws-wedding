@@ -97,7 +97,7 @@ export default async function AdminPage({ searchParams }: Props) {
           {host ? (
             <p className="mt-2 flex items-center gap-1.5 text-xs text-muted-foreground">
               <DatabaseIcon className="size-3.5" />
-              Database: {host}
+              Database connected
             </p>
           ) : (
             <p className="mt-2 flex items-center gap-1.5 text-sm text-destructive">
