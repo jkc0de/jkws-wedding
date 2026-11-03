@@ -20,7 +20,10 @@ export function sideFromFlag(groomFirst: boolean): "bride" | "groom" {
   return groomFirst ? "groom" : "bride";
 }
 
-/** Append the flag to an internal link when it is active. */
+/** Append the flag to an internal link when it is active, keeping any #hash last. */
 export function withFlag(href: string, groomFirst: boolean) {
-  return groomFirst ? `${href}${href.includes("?") ? "&" : "?"}${GROOM_FIRST_PARAM}` : href;
+  if (!groomFirst || href.startsWith("#") || /^[a-z]+:/i.test(href)) return href;
+  const [path, hash] = href.split("#");
+  const flagged = `${path}${path.includes("?") ? "&" : "?"}${GROOM_FIRST_PARAM}`;
+  return hash ? `${flagged}#${hash}` : flagged;
 }

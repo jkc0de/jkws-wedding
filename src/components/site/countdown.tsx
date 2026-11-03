@@ -24,7 +24,8 @@ function subscribe(onChange: () => void) {
 const getNow = () => Math.floor(Date.now() / 1000) * 1000;
 const getServerNow = () => null;
 
-export function Countdown({ target }: { target: string }) {
+/** `onPhoto`: darker labels on phones where the countdown sits over the photo. */
+export function Countdown({ target, onPhoto = false }: { target: string; onPhoto?: boolean }) {
   const targetMs = new Date(target).getTime();
   const now = useSyncExternalStore(subscribe, getNow, getServerNow);
   const parts = now === null ? undefined : diff(targetMs, now);
@@ -47,7 +48,7 @@ export function Countdown({ target }: { target: string }) {
           <span className="font-serif text-4xl tabular-nums text-primary sm:text-5xl">
             {value === undefined ? "--" : String(value).padStart(2, "0")}
           </span>
-          <span className="mt-1 text-[0.65rem] uppercase tracking-[0.25em] text-muted-foreground">
+          <span className={`mt-1 text-[0.65rem] uppercase tracking-[0.25em] ${onPhoto ? "font-medium text-foreground/80 md:font-normal md:text-muted-foreground" : "text-muted-foreground"}`}>
             {label}
           </span>
         </div>

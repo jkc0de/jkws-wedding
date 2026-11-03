@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
+import { FlagLink } from "@/components/site/flag-link";
 import { ArrowLeftIcon } from "lucide-react";
 import { RsvpForm } from "@/components/site/rsvp-form";
-import { GROOM_FIRST_PARAM, sideFromFlag, withFlag } from "@/lib/names";
+import { GROOM_FIRST_PARAM, sideFromFlag } from "@/lib/names";
 
 export const metadata: Metadata = {
   title: "RSVP",
@@ -17,13 +17,13 @@ export default async function RsvpPage({ searchParams }: Props) {
   return (
     <main className="flex-1 px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-xl">
-        <Link
-          href={withFlag("/", groomFirst)}
+        <FlagLink
+          href="/"
           className="mb-10 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
         >
           <ArrowLeftIcon className="size-4" />
           Back to the wedding
-        </Link>
+        </FlagLink>
 
         <div className="flex flex-col items-center text-center">
           <p className="section-eyebrow">Be our guest</p>

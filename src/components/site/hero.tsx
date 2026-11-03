@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import Image from "next/image";
-import Link from "next/link";
+import { FlagLink } from "./flag-link";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { Countdown } from "./countdown";
@@ -18,7 +18,7 @@ const WEDDING_DATETIME = "2027-01-23T18:00:00+08:00";
 const HERO_IMAGE = "/hero.jpg";
 const hasHeroImage = existsSync(path.join(process.cwd(), "public", HERO_IMAGE));
 
-export function Hero({ names, rsvpHref = "/rsvp" }: { names: [string, string]; rsvpHref?: string }) {
+export function Hero({ names }: { names: [string, string] }) {
   const [first, second] = names;
   return (
     <section
@@ -49,7 +49,7 @@ export function Hero({ names, rsvpHref = "/rsvp" }: { names: [string, string]; r
       />
 
       <div className="flex items-center justify-center px-4 py-16 text-center sm:px-6 md:py-20 lg:px-8">
-        <div>
+        <div className={cn(hasHeroImage && "[text-shadow:0_0_14px_rgba(251,246,236,0.95),0_0_4px_rgba(251,246,236,1)] md:[text-shadow:none]")}>
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-primary">
             Together with their families
           </p>
@@ -60,20 +60,32 @@ export function Hero({ names, rsvpHref = "/rsvp" }: { names: [string, string]; r
             <span className="block whitespace-nowrap">{second}</span>
           </h1>
 
-          <p className="mt-8 font-serif text-2xl text-foreground/80 sm:text-3xl">
+          <p
+            className={cn(
+              "mt-8 font-serif text-2xl sm:text-3xl",
+              hasHeroImage ? "text-foreground md:text-foreground/80" : "text-foreground/80",
+            )}
+          >
             Saturday, 23 January 2027
           </p>
-          <p className="mt-2 text-sm uppercase tracking-[0.25em] text-muted-foreground">
+          <p
+            className={cn(
+              "mt-2 text-sm uppercase tracking-[0.25em]",
+              hasHeroImage
+                ? "font-medium text-foreground/80 md:font-normal md:text-muted-foreground"
+                : "text-muted-foreground",
+            )}
+          >
             The St. Regis Kuala Lumpur
           </p>
 
           <div className="mt-10">
-            <Countdown target={WEDDING_DATETIME} />
+            <Countdown target={WEDDING_DATETIME} onPhoto={hasHeroImage} />
           </div>
 
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center">
+          <div className="mt-10 flex flex-col gap-3 [text-shadow:none] sm:flex-row sm:justify-center">
             <Button asChild className="h-11 rounded-full px-8 text-base">
-              <Link href={rsvpHref}>RSVP</Link>
+              <FlagLink href="/rsvp">RSVP</FlagLink>
             </Button>
             <Button asChild variant="outline" className="h-11 rounded-full px-8 text-base">
               <a href="#details">View details</a>

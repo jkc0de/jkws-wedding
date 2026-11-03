@@ -1,8 +1,8 @@
-import Link from "next/link";
+import { FlagLink } from "./flag-link";
 import { Button } from "@/components/ui/button";
 import { Section } from "./section";
 
-export function RsvpCta({ href = "/rsvp" }: { href?: string }) {
+export function RsvpCta() {
   return (
     <Section
       id="rsvp"
@@ -13,7 +13,7 @@ export function RsvpCta({ href = "/rsvp" }: { href?: string }) {
     >
       <div className="flex justify-center">
         <Button asChild className="h-12 rounded-full px-10 text-base">
-          <Link href={href}>RSVP now</Link>
+          <FlagLink href="/rsvp">RSVP now</FlagLink>
         </Button>
       </div>
     </Section>
