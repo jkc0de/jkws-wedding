@@ -49,7 +49,7 @@ export function Hero({ names }: { names: [string, string] }) {
       />
 
       <div className="flex items-center justify-center px-4 py-16 text-center sm:px-6 md:py-20 lg:px-8">
-        <div className={cn(hasHeroImage && "[text-shadow:0_0_14px_rgba(251,246,236,0.95),0_0_4px_rgba(251,246,236,1)] md:[text-shadow:none]")}>
+        <div>
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-primary">
             Together with their families
           </p>
@@ -72,7 +72,7 @@ export function Hero({ names }: { names: [string, string] }) {
             className={cn(
               "mt-2 text-sm uppercase tracking-[0.25em]",
               hasHeroImage
-                ? "font-medium text-foreground/80 md:font-normal md:text-muted-foreground"
+                ? "font-medium text-foreground md:font-normal md:text-muted-foreground"
                 : "text-muted-foreground",
             )}
           >
@@ -83,7 +83,7 @@ export function Hero({ names }: { names: [string, string] }) {
             <Countdown target={WEDDING_DATETIME} onPhoto={hasHeroImage} />
           </div>
 
-          <div className="mt-10 flex flex-col gap-3 [text-shadow:none] sm:flex-row sm:justify-center">
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Button asChild className="h-11 rounded-full px-8 text-base">
               <FlagLink href="/rsvp">RSVP</FlagLink>
             </Button>

@@ -48,7 +48,7 @@ export function Countdown({ target, onPhoto = false }: { target: string; onPhoto
           <span className="font-serif text-4xl tabular-nums text-primary sm:text-5xl">
             {value === undefined ? "--" : String(value).padStart(2, "0")}
           </span>
-          <span className={`mt-1 text-[0.65rem] uppercase tracking-[0.25em] ${onPhoto ? "font-medium text-foreground/80 md:font-normal md:text-muted-foreground" : "text-muted-foreground"}`}>
+          <span className={`mt-1 text-[0.65rem] uppercase tracking-[0.25em] ${onPhoto ? "font-medium text-foreground md:font-normal md:text-muted-foreground" : "text-muted-foreground"}`}>
             {label}
           </span>
         </div>
