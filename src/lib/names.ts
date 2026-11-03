@@ -7,6 +7,22 @@ export const GROOM = "Jordan Koh";
  */
 export const GROOM_FIRST_PARAM = "g";
 
+type ParamsLike = { has(name: string): boolean; get(name: string): string | null };
+
+/**
+ * True when the groom-first flag is present. Accepts the canonical `?g`,
+ * `?g=1`, and the easy-to-type slip `?=g`.
+ */
+export function hasGroomFlag(params: ParamsLike | Record<string, string | string[] | undefined>) {
+  if (typeof (params as ParamsLike).has === "function") {
+    const p = params as ParamsLike;
+    return p.has(GROOM_FIRST_PARAM) || p.get("") === GROOM_FIRST_PARAM;
+  }
+  const record = params as Record<string, string | string[] | undefined>;
+  const empty = record[""];
+  return GROOM_FIRST_PARAM in record || empty === GROOM_FIRST_PARAM || (Array.isArray(empty) && empty.includes(GROOM_FIRST_PARAM));
+}
+
 export function coupleNames(groomFirst: boolean): [string, string] {
   return groomFirst ? [GROOM, BRIDE] : [BRIDE, GROOM];
 }

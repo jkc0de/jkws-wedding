@@ -3,7 +3,7 @@
 import { Suspense, type ComponentProps } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { GROOM_FIRST_PARAM, withFlag } from "@/lib/names";
+import { hasGroomFlag, withFlag } from "@/lib/names";
 
 type Props = Omit<ComponentProps<typeof Link>, "href"> & { href: string };
 
@@ -21,5 +21,5 @@ export function FlagLink(props: Props) {
 
 function FlagAwareLink({ href, ...rest }: Props) {
   const params = useSearchParams();
-  return <Link href={withFlag(href, params.has(GROOM_FIRST_PARAM))} {...rest} />;
+  return <Link href={withFlag(href, hasGroomFlag(params))} {...rest} />;
 }

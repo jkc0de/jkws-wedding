@@ -4,12 +4,12 @@ import { Details } from "@/components/site/details";
 import { Gallery } from "@/components/site/gallery";
 import { Faq } from "@/components/site/faq";
 import { RsvpCta } from "@/components/site/rsvp-cta";
-import { coupleNames, coupleTitle, GROOM_FIRST_PARAM } from "@/lib/names";
+import { coupleNames, coupleTitle, GROOM_FIRST_PARAM, hasGroomFlag } from "@/lib/names";
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 
 async function groomFirstFrom(searchParams: Props["searchParams"]) {
-  return GROOM_FIRST_PARAM in (await searchParams);
+  return hasGroomFlag(await searchParams);
 }
 
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {

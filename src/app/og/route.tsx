@@ -5,7 +5,7 @@ import { ImageResponse } from "next/og";
 import sharp from "sharp";
 
 import type { NextRequest } from "next/server";
-import { coupleNames, GROOM_FIRST_PARAM } from "@/lib/names";
+import { coupleNames, hasGroomFlag } from "@/lib/names";
 
 /**
  * Link-preview image for WhatsApp, iMessage, Facebook, etc.
@@ -20,7 +20,7 @@ const HEIGHT = 630;
 const root = process.cwd();
 
 export async function GET(request: NextRequest) {
-  const [first, second] = coupleNames(request.nextUrl.searchParams.has(GROOM_FIRST_PARAM));
+  const [first, second] = coupleNames(hasGroomFlag(request.nextUrl.searchParams));
   const [photo, logo, stRegis, light, regular, lightItalic] = await Promise.all([
     sharp(path.join(root, "public/hero.jpg"))
       .resize(600, HEIGHT, { fit: "cover", position: "centre" })

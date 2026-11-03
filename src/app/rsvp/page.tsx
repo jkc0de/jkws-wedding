@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FlagLink } from "@/components/site/flag-link";
 import { ArrowLeftIcon } from "lucide-react";
 import { RsvpForm } from "@/components/site/rsvp-form";
-import { GROOM_FIRST_PARAM, sideFromFlag } from "@/lib/names";
+import { hasGroomFlag, sideFromFlag } from "@/lib/names";
 
 export const metadata: Metadata = {
   title: "RSVP",
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 
 export default async function RsvpPage({ searchParams }: Props) {
-  const groomFirst = GROOM_FIRST_PARAM in (await searchParams);
+  const groomFirst = hasGroomFlag(await searchParams);
   return (
     <main className="flex-1 px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-xl">
