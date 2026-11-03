@@ -22,16 +22,31 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Jordan Koh & Wai Seun — 23 January 2027",
-    template: "%s · Jordan Koh & Wai Seun",
+    default: "Jordan Koh & Wong Wai Seun — 23 January 2027",
+    template: "%s · Jordan Koh & Wong Wai Seun",
   },
   description:
     "Join us to celebrate our wedding at The St. Regis Kuala Lumpur on 23 January 2027.",
   openGraph: {
-    title: "Jordan Koh & Wai Seun",
+    title: "Jordan Koh & Wong Wai Seun",
     description: "Saturday, 23 January 2027 · The St. Regis Kuala Lumpur",
     type: "website",
     locale: "en_MY",
+    images: [
+      {
+        url: "/og",
+        width: 1200,
+        height: 630,
+        type: "image/jpeg",
+        alt: "Jordan Koh & Wong Wai Seun — 23 January 2027, The St. Regis Kuala Lumpur",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jordan Koh & Wong Wai Seun",
+    description: "Saturday, 23 January 2027 · The St. Regis Kuala Lumpur",
+    images: ["/og"],
   },
 };
 

@@ -1,0 +1,106 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { ImageResponse } from "next/og";
+import sharp from "sharp";
+
+/**
+ * Link-preview image for WhatsApp, iMessage, Facebook, etc.
+ * Rendered once at build time: photo on the right, names on the left,
+ * exported as a JPEG under ~200 KB so every messaging app will show it.
+ */
+export const dynamic = "force-static";
+
+const WIDTH = 1200;
+const HEIGHT = 630;
+
+// Literal paths so Next can trace these files into the deployment.
+const root = process.cwd();
+
+export async function GET() {
+  const [photo, logo, light, regular, lightItalic] = await Promise.all([
+    sharp(path.join(root, "public/hero.jpg"))
+      .resize(600, HEIGHT, { fit: "cover", position: "centre" })
+      .jpeg({ quality: 88 })
+      .toBuffer(),
+    readFile(path.join(root, "public/logo.png")),
+    readFile(path.join(root, "src/app/og/cormorant-300.woff")),
+    readFile(path.join(root, "src/app/og/cormorant-400.woff")),
+    readFile(path.join(root, "src/app/og/cormorant-300-italic.woff")),
+  ]);
+
+  const png = await new ImageResponse(
+    (
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          background: "#fbf6ec",
+          fontFamily: "Cormorant",
+          color: "#2b1d1f",
+        }}
+      >
+        <div
+          style={{
+            width: 600,
+            height: "100%",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "0 48px",
+            textAlign: "center",
+          }}
+        >
+          <img src={`data:image/png;base64,${logo.toString("base64")}`} width={56} height={84} alt="" />
+          <div
+            style={{
+              marginTop: 28,
+              fontSize: 15,
+              letterSpacing: 6,
+              color: "#961e2e",
+              textTransform: "uppercase",
+              fontFamily: "sans-serif",
+            }}
+          >
+            Together with their families
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: 18, fontSize: 68, fontWeight: 300, lineHeight: 1 }}>
+            <span>Jordan Koh</span>
+            <span style={{ color: "#961e2e", fontStyle: "italic", fontSize: 54, margin: "6px 0" }}>&amp;</span>
+            <span>Wong Wai Seun</span>
+          </div>
+          <div style={{ marginTop: 30, fontSize: 32, fontWeight: 400, color: "#5a4a47" }}>Saturday, 23 January 2027</div>
+          <div style={{ marginTop: 8, fontSize: 15, letterSpacing: 5, color: "#7a6a66", textTransform: "uppercase", fontFamily: "sans-serif" }}>
+            The St. Regis Kuala Lumpur
+          </div>
+        </div>
+        <img
+          src={`data:image/jpeg;base64,${photo.toString("base64")}`}
+          width={600}
+          height={HEIGHT}
+          alt=""
+          style={{ objectFit: "cover" }}
+        />
+      </div>
+    ),
+    {
+      width: WIDTH,
+      height: HEIGHT,
+      fonts: [
+        { name: "Cormorant", data: light, weight: 300, style: "normal" },
+        { name: "Cormorant", data: regular, weight: 400, style: "normal" },
+        { name: "Cormorant", data: lightItalic, weight: 300, style: "italic" },
+      ],
+    },
+  ).arrayBuffer();
+
+  const jpeg = await sharp(Buffer.from(png)).jpeg({ quality: 84, mozjpeg: true }).toBuffer();
+
+  return new Response(new Uint8Array(jpeg), {
+    headers: {
+      "Content-Type": "image/jpeg",
+      "Cache-Control": "public, max-age=86400, stale-while-revalidate=604800",
+    },
+  });
+}
