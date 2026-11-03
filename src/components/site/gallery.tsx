@@ -36,8 +36,12 @@ async function loadPhotos(): Promise<Photo[]> {
   );
 }
 
+let photosPromise: Promise<Photo[]> | undefined;
+
 export async function Gallery() {
-  const photos = await loadPhotos();
+  // Scan the folder once per server process; it only changes on redeploy.
+  photosPromise ??= loadPhotos();
+  const photos = await photosPromise;
 
   return (
     <Section id="gallery" eyebrow="Moments" title="Gallery">

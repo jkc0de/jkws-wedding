@@ -18,7 +18,8 @@ const WEDDING_DATETIME = "2027-01-23T18:00:00+08:00";
 const HERO_IMAGE = "/hero.jpg";
 const hasHeroImage = existsSync(path.join(process.cwd(), "public", HERO_IMAGE));
 
-export function Hero() {
+export function Hero({ names }: { names: [string, string] }) {
+  const [first, second] = names;
   return (
     <section
       id="top"
@@ -54,9 +55,9 @@ export function Hero() {
           </p>
 
           <h1 className="mt-6 font-serif text-5xl font-light leading-none tracking-tight text-foreground sm:text-6xl md:text-5xl lg:text-6xl xl:text-7xl">
-            <span className="block whitespace-nowrap">Jordan Koh</span>
+            <span className="block whitespace-nowrap">{first}</span>
             <span className="my-2 block italic text-primary">&amp;</span>
-            <span className="block whitespace-nowrap">Wong Wai Seun</span>
+            <span className="block whitespace-nowrap">{second}</span>
           </h1>
 
           <p className="mt-8 font-serif text-2xl text-foreground/80 sm:text-3xl">

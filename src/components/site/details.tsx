@@ -11,7 +11,7 @@ const GOOGLE_MAPS_URL =
 const WAZE_URL = "https://waze.com/ul?q=The%20St.%20Regis%20Kuala%20Lumpur&navigate=yes";
 const GOOGLE_CALENDAR_URL =
   "https://calendar.google.com/calendar/render?action=TEMPLATE" +
-  "&text=" + encodeURIComponent("Jordan Koh & Wai Seun's Wedding") +
+  "&text=" + encodeURIComponent("Wong Wai Seun & Jordan Koh's Wedding") +
   "&dates=20270123T100000Z/20270123T150000Z" +
   "&location=" + encodeURIComponent("The St. Regis Kuala Lumpur, No. 6, Jalan Stesen Sentral 2, 50470 Kuala Lumpur") +
   "&details=" + encodeURIComponent("Cocktails at 6:00 PM, dinner at 7:00 PM, after party at 10:30 PM. Dress code: formal.");

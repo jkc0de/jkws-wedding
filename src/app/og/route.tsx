@@ -3,12 +3,14 @@ import path from "node:path";
 import { ImageResponse } from "next/og";
 import sharp from "sharp";
 
+import type { NextRequest } from "next/server";
+import { coupleNames, GROOM_FIRST_PARAM } from "@/lib/names";
+
 /**
  * Link-preview image for WhatsApp, iMessage, Facebook, etc.
- * Rendered once at build time: photo on the right, names on the left,
- * exported as a JPEG under ~200 KB so every messaging app will show it.
+ * Photo on the right, names on the left, exported as a JPEG under ~100 KB so
+ * every messaging app will show it. `/og?g` puts the groom first.
  */
-export const dynamic = "force-static";
 
 const WIDTH = 1200;
 const HEIGHT = 630;
@@ -16,7 +18,8 @@ const HEIGHT = 630;
 // Literal paths so Next can trace these files into the deployment.
 const root = process.cwd();
 
-export async function GET() {
+export async function GET(request: NextRequest) {
+  const [first, second] = coupleNames(request.nextUrl.searchParams.has(GROOM_FIRST_PARAM));
   const [photo, logo, light, regular, lightItalic] = await Promise.all([
     sharp(path.join(root, "public/hero.jpg"))
       .resize(600, HEIGHT, { fit: "cover", position: "centre" })
@@ -66,9 +69,9 @@ export async function GET() {
             Together with their families
           </div>
           <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: 18, fontSize: 68, fontWeight: 300, lineHeight: 1 }}>
-            <span>Jordan Koh</span>
+            <span>{first}</span>
             <span style={{ color: "#961e2e", fontStyle: "italic", fontSize: 54, margin: "6px 0" }}>&amp;</span>
-            <span>Wong Wai Seun</span>
+            <span>{second}</span>
           </div>
           <div style={{ marginTop: 30, fontSize: 32, fontWeight: 400, color: "#5a4a47" }}>Saturday, 23 January 2027</div>
           <div style={{ marginTop: 8, fontSize: 15, letterSpacing: 5, color: "#7a6a66", textTransform: "uppercase", fontFamily: "sans-serif" }}>

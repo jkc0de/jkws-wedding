@@ -1,4 +1,4 @@
-# Jordan & Wai Seun — Wedding Website
+# Wai Seun & Jordan — Wedding Website
 
 One-page wedding site with a guest RSVP flow, built with Next.js, Tailwind CSS and shadcn/ui.
 
@@ -15,7 +15,7 @@ Open http://localhost:3000. RSVPs are saved to `data/rsvps.json` until a databas
 
 | Route        | What it is                                             |
 | ------------ | ------------------------------------------------------ |
-| `/`          | Main page: banner, details, gallery, FAQ, RSVP prompt  |
+| `/`          | Main page, bride's name first. `/?g` shows the groom first |
 | `/rsvp`      | RSVP form (share this link directly with guests)       |
 | `/admin`     | Password-protected list of responses with CSV download |
 | `/calendar`  | Downloadable calendar invite (.ics)                    |
