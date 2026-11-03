@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Section } from "./section";
+import { CardCorners } from "./card-corners";
 
 const GOOGLE_MAPS_URL =
   "https://www.google.com/maps/search/?api=1&query=The+St.+Regis+Kuala+Lumpur";
@@ -24,8 +25,9 @@ export function Details() {
       intro="Saturday, 23 January 2027"
       className="bg-white"
     >
-      <Card className="mx-auto max-w-xl border-border/80 bg-background">
-        <CardContent className="flex flex-col items-center gap-6 px-6 py-10 text-center sm:px-10">
+      <Card className="relative mx-auto max-w-xl border-primary/20 bg-background shadow-[0_30px_60px_-40px_rgba(150,30,46,0.35)]">
+        <CardCorners />
+        <CardContent className="flex flex-col items-center gap-6 px-8 py-12 text-center sm:px-12">
           <Image
             src="/st-regis-logo.svg"
             alt="St. Regis"
