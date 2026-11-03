@@ -20,12 +20,13 @@ const root = process.cwd();
 
 export async function GET(request: NextRequest) {
   const [first, second] = coupleNames(request.nextUrl.searchParams.has(GROOM_FIRST_PARAM));
-  const [photo, logo, light, regular, lightItalic] = await Promise.all([
+  const [photo, logo, stRegis, light, regular, lightItalic] = await Promise.all([
     sharp(path.join(root, "public/hero.jpg"))
       .resize(600, HEIGHT, { fit: "cover", position: "centre" })
       .jpeg({ quality: 88 })
       .toBuffer(),
     readFile(path.join(root, "public/logo.png")),
+    readFile(path.join(root, "public/st-regis-logo.svg")),
     readFile(path.join(root, "src/app/og/cormorant-300.woff")),
     readFile(path.join(root, "src/app/og/cormorant-400.woff")),
     readFile(path.join(root, "src/app/og/cormorant-300-italic.woff")),
@@ -77,6 +78,13 @@ export async function GET(request: NextRequest) {
           <div style={{ marginTop: 8, fontSize: 15, letterSpacing: 5, color: "#7a6a66", textTransform: "uppercase", fontFamily: "sans-serif" }}>
             The St. Regis Kuala Lumpur
           </div>
+          <img
+            src={`data:image/svg+xml;base64,${stRegis.toString("base64")}`}
+            width={110}
+            height={30}
+            alt=""
+            style={{ marginTop: 16 }}
+          />
         </div>
         <img
           src={`data:image/jpeg;base64,${photo.toString("base64")}`}
