@@ -13,6 +13,11 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    // Generated shadcn/ui components: leave their effect patterns as published.
+    files: ["src/components/ui/**"],
+    rules: { "react-hooks/set-state-in-effect": "off" },
+  },
 ]);
 
 export default eslintConfig;

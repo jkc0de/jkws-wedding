@@ -1,36 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jordan & Wai Seun — Wedding Website
 
-## Getting Started
+One-page wedding site with a guest RSVP flow, built with Next.js, Tailwind CSS and shadcn/ui.
 
-First, run the development server:
+## Run locally
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000. RSVPs are saved to `data/rsvps.json` until a database is configured.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pages
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Route        | What it is                                             |
+| ------------ | ------------------------------------------------------ |
+| `/`          | Main page: banner, details, gallery, FAQ, RSVP prompt  |
+| `/rsvp`      | RSVP form (share this link directly with guests)       |
+| `/admin`     | Password-protected list of responses with CSV download |
+| `/calendar`  | Downloadable calendar invite (.ics)                    |
 
-## Learn More
+## Content
 
-To learn more about Next.js, take a look at the following resources:
+Everything lives in the components, no CMS:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Names, date, countdown target: `src/components/site/hero.tsx`
+- Venue, times, dress code, map and calendar links: `src/components/site/details.tsx`
+- FAQ: `src/components/site/faq.tsx`
+- RSVP copy and validation: `src/components/site/rsvp-form.tsx`, `src/lib/rsvp/schema.ts`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Photos
 
-## Deploy on Vercel
+- **Banner**: save your photo as `public/hero.jpg` (portrait, 2:3). It appears beside the names on desktop and below them on phones.
+- **Gallery**: drop images into `public/gallery/`. They appear sorted by filename. Rebuild or redeploy after adding.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Music
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`public/audio/canon-in-d.m4a` plays on loop once a guest taps anywhere. The speaker button in the header mutes it. Replace the file to change the track.
+
+## Going live
+
+1. Copy `.env.example` to `.env.local` and fill it in.
+2. Create a Postgres database (Neon and Supabase both have free tiers) and set `DATABASE_URL`. The `rsvps` table is created on first use.
+3. Set `ADMIN_PASSWORD` to view responses at `/admin`.
+4. Set `NEXT_PUBLIC_SITE_URL` to the final domain so WhatsApp link previews work.
+5. Deploy to Vercel (or any Node host) with those three variables set.
+
+Without `DATABASE_URL`, RSVPs on a serverless host are lost between requests.
