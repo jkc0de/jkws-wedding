@@ -47,16 +47,16 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-20 bg-[radial-gradient(ellipse_at_top,rgba(150,30,46,0.08),transparent_60%)]"
       />
 
-      <div className="flex items-center justify-center px-4 py-16 text-center sm:px-6 md:px-10 md:py-20">
+      <div className="flex items-center justify-center px-4 py-16 text-center sm:px-6 md:py-20 lg:px-8">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.3em] text-primary">
             Together with their families
           </p>
 
-          <h1 className="mt-6 font-serif text-6xl font-light leading-none tracking-tight text-foreground sm:text-7xl lg:text-8xl">
+          <h1 className="mt-6 font-serif text-6xl font-light leading-none tracking-tight text-foreground sm:text-7xl md:text-6xl lg:text-7xl xl:text-8xl">
             <span className="block whitespace-nowrap">Jordan Koh</span>
             <span className="my-2 block italic text-primary">&amp;</span>
-            <span className="block whitespace-nowrap">Wai Seun</span>
+            <span className="block whitespace-nowrap">Wong Wai Seun</span>
           </h1>
 
           <p className="mt-8 font-serif text-2xl text-foreground/80 sm:text-3xl">
