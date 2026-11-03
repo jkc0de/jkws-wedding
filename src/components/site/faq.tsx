@@ -20,10 +20,6 @@ const faqs = [
     a: "Yes. The St. Regis offers valet parking at the main entrance. The hotel is also directly connected to KL Sentral, so KTM, LRT, MRT and KLIA Ekspres are all a short covered walk away.",
   },
   {
-    q: "Need a room at The St. Regis?",
-    a: "If you would like to stay at The St. Regis Kuala Lumpur, let us know and we can arrange preferential rates for our guests.",
-  },
-  {
     q: "When should I RSVP by?",
     a: "Please respond by 1st December 2026 on the RSVP page so we can confirm numbers with the venue.",
   },

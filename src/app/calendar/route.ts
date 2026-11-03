@@ -11,10 +11,10 @@ const ics = [
   "UID:wedding-2027-01-23@jordan-and-wai-seun",
   "DTSTAMP:20261101T000000Z",
   "DTSTART:20270123T100000Z",
-  "DTEND:20270123T150000Z",
+  "DTEND:20270123T160000Z",
   "SUMMARY:Jordan Koh & Wai Seun's Wedding",
   "LOCATION:The St. Regis Kuala Lumpur\\, No. 6\\, Jalan Stesen Sentral 2\\, 50470 Kuala Lumpur",
-  "DESCRIPTION:Cocktails at 6:00 PM\\, dinner at 7:00 PM. Dress code: formal.",
+  "DESCRIPTION:Cocktails at 6:00 PM\\, dinner at 7:00 PM\\, after party at 10:30 PM. Dress code: formal.",
   "END:VEVENT",
   "END:VCALENDAR",
 ].join("\r\n");

@@ -53,7 +53,7 @@ export function Hero() {
             Together with their families
           </p>
 
-          <h1 className="mt-6 font-serif text-6xl font-light leading-none tracking-tight text-foreground sm:text-7xl md:text-6xl lg:text-7xl xl:text-8xl">
+          <h1 className="mt-6 font-serif text-5xl font-light leading-none tracking-tight text-foreground sm:text-6xl md:text-5xl lg:text-6xl xl:text-7xl">
             <span className="block whitespace-nowrap">Jordan Koh</span>
             <span className="my-2 block italic text-primary">&amp;</span>
             <span className="block whitespace-nowrap">Wong Wai Seun</span>

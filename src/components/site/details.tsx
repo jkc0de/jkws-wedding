@@ -13,7 +13,7 @@ const GOOGLE_CALENDAR_URL =
   "&text=" + encodeURIComponent("Jordan Koh & Wai Seun's Wedding") +
   "&dates=20270123T100000Z/20270123T150000Z" +
   "&location=" + encodeURIComponent("The St. Regis Kuala Lumpur, No. 6, Jalan Stesen Sentral 2, 50470 Kuala Lumpur") +
-  "&details=" + encodeURIComponent("Cocktails at 6:00 PM, dinner at 7:00 PM. Dress code: formal.");
+  "&details=" + encodeURIComponent("Cocktails at 6:00 PM, dinner at 7:00 PM, after party at 10:30 PM. Dress code: formal.");
 
 export function Details() {
   return (
@@ -50,7 +50,7 @@ export function Details() {
 
           <Separator className="max-w-24" />
 
-          <div className="flex items-start justify-center gap-10 sm:gap-16">
+          <div className="flex flex-wrap items-start justify-center gap-x-10 gap-y-6 sm:gap-x-14">
             <div>
               <p className="section-eyebrow">Cocktails</p>
               <p className="mt-1 font-serif text-3xl">6:00 PM</p>
@@ -58,6 +58,10 @@ export function Details() {
             <div>
               <p className="section-eyebrow">Dinner</p>
               <p className="mt-1 font-serif text-3xl">7:00 PM</p>
+            </div>
+            <div>
+              <p className="section-eyebrow">After party</p>
+              <p className="mt-1 font-serif text-3xl">10:30 PM</p>
             </div>
           </div>
 
