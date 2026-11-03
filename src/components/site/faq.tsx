@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: "Is there parking at the venue?",
-    a: "Yes. The St. Regis offers valet parking at the main entrance. The hotel is also directly connected to KL Sentral, so KTM, LRT, MRT and KLIA Ekspres are all a short covered walk away.",
+    a: "Yes. There is basement parking at the hotel, and valet parking is available at the main entrance. The St. Regis is also directly connected to KL Sentral, so KTM, LRT, MRT and KLIA Ekspres are all a short covered walk away.",
   },
   {
     q: "When should I RSVP by?",
