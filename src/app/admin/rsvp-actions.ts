@@ -23,6 +23,7 @@ export async function saveRsvpAsAdmin(_prev: AdminRsvpState, formData: FormData)
       .split("\n")
       .map((g) => g.trim())
       .filter(Boolean),
+    dietary: str(formData.get("dietary")),
     message: str(formData.get("message")),
   });
   if (!parsed.success) {

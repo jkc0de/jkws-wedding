@@ -16,12 +16,13 @@ export async function GET() {
   const store = await getRsvpStore();
   const rsvps = await store.list();
 
-  const header = ["Name", "Reply", "Additional guests", "Seats", "Note", "Submitted", "Last updated"];
+  const header = ["Name", "Reply", "Additional guests", "Seats", "Dietary", "Note", "Submitted", "Last updated"];
   const rows = rsvps.map((r) => [
     r.fullName,
     r.attendance === "accept" ? "Accepts" : "Declines",
     r.guests.join("; "),
     r.guestCount,
+    r.dietary,
     r.message,
     r.createdAt,
     r.updatedAt,

@@ -100,6 +100,11 @@ export function RsvpEditor({ rsvp }: { rsvp?: Rsvp }) {
           </div>
 
           <div className="space-y-2">
+            <Label htmlFor="admin-dietary">Dietary restrictions &amp; allergies</Label>
+            <Textarea id="admin-dietary" name="dietary" defaultValue={rsvp?.dietary} rows={2} />
+          </div>
+
+          <div className="space-y-2">
             <Label htmlFor="admin-message">Note</Label>
             <Textarea id="admin-message" name="message" defaultValue={rsvp?.message} rows={2} />
           </div>

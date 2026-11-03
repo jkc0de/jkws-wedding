@@ -3,7 +3,7 @@
 import { rsvpSchema, type Attendance } from "@/lib/rsvp/schema";
 import { getRsvpStore } from "@/lib/rsvp/store";
 
-export type RsvpValues = { fullName: string; attendance: string; guests: string[]; message: string };
+export type RsvpValues = { fullName: string; attendance: string; guests: string[]; dietary: string; message: string };
 export type RsvpFieldErrors = Partial<Record<keyof RsvpValues, string>>;
 
 export type RsvpState =
@@ -20,6 +20,7 @@ export async function submitRsvp(_prev: RsvpState, formData: FormData): Promise<
     fullName: str(formData.get("fullName")),
     attendance: str(formData.get("attendance")),
     guests: formData.getAll("guests").map(str),
+    dietary: str(formData.get("dietary")),
     message: str(formData.get("message")),
   };
 

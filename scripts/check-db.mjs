@@ -35,6 +35,7 @@ try {
       updated_at timestamptz NOT NULL DEFAULT now()
     )`;
   await sql`ALTER TABLE rsvps ADD COLUMN IF NOT EXISTS attendance text NOT NULL DEFAULT 'accept'`;
+  await sql`ALTER TABLE rsvps ADD COLUMN IF NOT EXISTS dietary text NOT NULL DEFAULT ''`;
   const [{ count }] = await sql`SELECT count(*)::int AS count FROM rsvps`;
   console.log(`rsvps table ready. Responses so far: ${count}`);
   console.log("All good. RSVPs will be stored in this database.");

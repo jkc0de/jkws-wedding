@@ -7,6 +7,7 @@ type Row = {
   full_name: string;
   attendance: Attendance;
   guests: string[];
+  dietary: string;
   message: string;
   created_at: Date;
   updated_at: Date;
@@ -35,6 +36,7 @@ function ensureSchema(sql: Sql): Promise<void> {
     .then(
       () => sql`ALTER TABLE rsvps ADD COLUMN IF NOT EXISTS attendance text NOT NULL DEFAULT 'accept'`,
     )
+    .then(() => sql`ALTER TABLE rsvps ADD COLUMN IF NOT EXISTS dietary text NOT NULL DEFAULT ''`)
     .then(() => undefined);
   return globalForSql.__weddingSchema;
 }
@@ -45,6 +47,7 @@ function toRsvp(row: Row): Rsvp {
     fullName: row.full_name,
     attendance: row.attendance,
     guests: row.guests,
+    dietary: row.dietary,
     message: row.message,
     guestCount: toGuestCount({ guests: row.guests, attendance: row.attendance }),
     createdAt: row.created_at.toISOString(),
@@ -59,19 +62,21 @@ export function createPostgresStore(url: string): RsvpStore {
     async save(data) {
       await ensureSchema(sql);
       const [row] = await sql<(Row & { inserted: boolean })[]>`
-        INSERT INTO rsvps (id, name_key, full_name, attendance, guests, message)
+        INSERT INTO rsvps (id, name_key, full_name, attendance, guests, dietary, message)
         VALUES (
           ${crypto.randomUUID()},
           ${nameKey(data.fullName)},
           ${data.fullName},
           ${data.attendance},
           ${sql.json(data.guests)},
+          ${data.dietary},
           ${data.message}
         )
         ON CONFLICT (name_key) DO UPDATE SET
           full_name = EXCLUDED.full_name,
           attendance = EXCLUDED.attendance,
           guests = EXCLUDED.guests,
+          dietary = EXCLUDED.dietary,
           message = EXCLUDED.message,
           updated_at = now()
         RETURNING *, (xmax = 0) AS inserted
@@ -92,6 +97,7 @@ export function createPostgresStore(url: string): RsvpStore {
             full_name = ${data.fullName},
             attendance = ${data.attendance},
             guests = ${sql.json(data.guests)},
+            dietary = ${data.dietary},
             message = ${data.message},
             updated_at = now()
           WHERE id = ${id}

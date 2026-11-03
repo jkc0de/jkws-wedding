@@ -20,10 +20,13 @@ export const rsvpSchema = z
       .refine((list) => list.every((g) => g.length >= 2), {
         message: "Please fill in each guest's name or remove the empty row.",
       }),
+    dietary: z.string().trim().max(500).optional().default(""),
     message: z.string().trim().max(1000).optional().default(""),
   })
-  // Declining guests bring nobody.
-  .transform((data) => (data.attendance === "decline" ? { ...data, guests: [] } : data));
+  // Declining guests bring nobody and need no meal notes.
+  .transform((data) =>
+    data.attendance === "decline" ? { ...data, guests: [], dietary: "" } : data,
+  );
 
 export type RsvpInput = z.input<typeof rsvpSchema>;
 export type RsvpData = z.output<typeof rsvpSchema>;

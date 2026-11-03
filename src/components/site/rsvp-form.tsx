@@ -156,6 +156,23 @@ export function RsvpForm() {
             </div>
           ) : null}
 
+          {accepting ? (
+            <Field
+              label="Dietary restrictions & allergies"
+              htmlFor="dietary"
+              error={errors.dietary}
+              optional
+            >
+              <Textarea
+                id="dietary"
+                name="dietary"
+                defaultValue={values?.dietary}
+                placeholder="Vegetarian, halal, nut allergy, etc."
+                rows={2}
+              />
+            </Field>
+          ) : null}
+
           <Field label="A note for the couple" htmlFor="message" error={errors.message} optional>
             <Textarea
               id="message"

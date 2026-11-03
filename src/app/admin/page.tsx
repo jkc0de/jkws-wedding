@@ -112,6 +112,7 @@ export default async function AdminPage() {
                   <TableHead>Reply</TableHead>
                   <TableHead>Additional guests</TableHead>
                   <TableHead className="text-right">Seats</TableHead>
+                  <TableHead>Dietary</TableHead>
                   <TableHead>Note</TableHead>
                   <TableHead>Last updated</TableHead>
                   <TableHead className="pr-6 text-right">Actions</TableHead>
@@ -144,6 +145,9 @@ export default async function AdminPage() {
                       )}
                     </TableCell>
                     <TableCell className="text-right tabular-nums">{r.guestCount}</TableCell>
+                    <TableCell className="max-w-[12rem] whitespace-pre-wrap text-muted-foreground">
+                      {r.dietary || "—"}
+                    </TableCell>
                     <TableCell className="max-w-xs whitespace-pre-wrap text-muted-foreground">
                       {r.message || "—"}
                     </TableCell>
