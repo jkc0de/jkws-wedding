@@ -4,7 +4,7 @@ import { useActionState, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { HeartIcon, Loader2Icon, PlusIcon, XIcon } from "lucide-react";
 import { submitRsvp, type RsvpState } from "@/app/actions/rsvp";
-import type { Attendance } from "@/lib/rsvp/schema";
+import type { Attendance, Side } from "@/lib/rsvp/schema";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -14,7 +14,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 const initialState: RsvpState = { status: "idle" };
 
-export function RsvpForm() {
+export function RsvpForm({ side = "bride" }: { side?: Side }) {
   const [state, formAction, pending] = useActionState(submitRsvp, initialState);
   const [attendance, setAttendance] = useState<Attendance>("accept");
   const [guests, setGuests] = useState<string[]>([]);
@@ -82,6 +82,8 @@ export function RsvpForm() {
             <label htmlFor="website">Website</label>
             <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
           </div>
+
+          <input type="hidden" name="side" value={side} />
 
           <Field label="Your name" htmlFor="fullName" error={errors.fullName}>
             <Input

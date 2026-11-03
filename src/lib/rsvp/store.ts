@@ -58,6 +58,17 @@ export function databaseUrl(): string | undefined {
   return url;
 }
 
+/** Host name of the configured database, for display only. */
+export function databaseHost(): string | undefined {
+  const url = databaseUrl();
+  if (!url) return undefined;
+  try {
+    return new URL(url.replace(/^postgres(ql)?:/, "http:")).hostname;
+  } catch {
+    return "database";
+  }
+}
+
 export async function getRsvpStore(): Promise<RsvpStore> {
   if (store) return store;
   const url = databaseUrl();

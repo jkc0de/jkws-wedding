@@ -88,6 +88,20 @@ export function RsvpEditor({ rsvp }: { rsvp?: Rsvp }) {
           </div>
 
           <div className="space-y-2">
+            <Label>Side</Label>
+            <RadioGroup name="side" defaultValue={rsvp?.side ?? "bride"} className="flex gap-6">
+              <Label htmlFor="admin-side-bride" className="flex items-center gap-2 font-normal">
+                <RadioGroupItem id="admin-side-bride" value="bride" />
+                Bride
+              </Label>
+              <Label htmlFor="admin-side-groom" className="flex items-center gap-2 font-normal">
+                <RadioGroupItem id="admin-side-groom" value="groom" />
+                Groom
+              </Label>
+            </RadioGroup>
+          </div>
+
+          <div className="space-y-2">
             <Label htmlFor="admin-guests">Additional guests</Label>
             <Textarea
               id="admin-guests"

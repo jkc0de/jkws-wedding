@@ -3,6 +3,10 @@ import { z } from "zod";
 export const attendanceValues = ["accept", "decline"] as const;
 export type Attendance = (typeof attendanceValues)[number];
 
+/** Which family invited the guest. Set from the `?g` link flag; bride by default. */
+export const sideValues = ["bride", "groom"] as const;
+export type Side = (typeof sideValues)[number];
+
 const name = z
   .string()
   .trim()
@@ -13,6 +17,7 @@ export const rsvpSchema = z
   .object({
     fullName: name.refine((s) => s.length >= 2, "Please enter your name."),
     attendance: z.enum(attendanceValues, { message: "Please let us know if you can make it." }),
+    side: z.enum(sideValues).catch("bride"),
     guests: z
       .array(name)
       // No limit for guests; this ceiling only stops abuse.

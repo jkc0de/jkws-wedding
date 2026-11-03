@@ -18,7 +18,7 @@ const WEDDING_DATETIME = "2027-01-23T18:00:00+08:00";
 const HERO_IMAGE = "/hero.jpg";
 const hasHeroImage = existsSync(path.join(process.cwd(), "public", HERO_IMAGE));
 
-export function Hero({ names }: { names: [string, string] }) {
+export function Hero({ names, rsvpHref = "/rsvp" }: { names: [string, string]; rsvpHref?: string }) {
   const [first, second] = names;
   return (
     <section
@@ -73,7 +73,7 @@ export function Hero({ names }: { names: [string, string] }) {
 
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:justify-center">
             <Button asChild className="h-11 rounded-full px-8 text-base">
-              <Link href="/rsvp">RSVP</Link>
+              <Link href={rsvpHref}>RSVP</Link>
             </Button>
             <Button asChild variant="outline" className="h-11 rounded-full px-8 text-base">
               <a href="#details">View details</a>

@@ -3,6 +3,7 @@ import { cookies } from "next/headers";
 
 const COOKIE = "wedding_admin";
 const MIN_PASSWORD_LENGTH = 8;
+const SESSION_DAYS = 30;
 
 function secret() {
   return process.env.ADMIN_PASSWORD ?? "";
@@ -13,8 +14,8 @@ export function isAdminConfigured() {
   return secret().length >= MIN_PASSWORD_LENGTH;
 }
 
-function sessionToken() {
-  return createHmac("sha256", secret()).update("wedding-admin-session-v1").digest("hex");
+function sign(expiresAt: number) {
+  return createHmac("sha256", secret()).update(`wedding-admin-session-v2:${expiresAt}`).digest("hex");
 }
 
 function safeEqual(a: string, b: string) {
@@ -27,10 +28,18 @@ export function checkPassword(password: string) {
   return isAdminConfigured() && safeEqual(password, secret());
 }
 
+/**
+ * Session cookie is `<expiry>.<hmac>`: it expires on its own, and changing
+ * ADMIN_PASSWORD invalidates every existing session.
+ */
 export async function isAdmin() {
   if (!isAdminConfigured()) return false;
   const value = (await cookies()).get(COOKIE)?.value;
-  return Boolean(value) && safeEqual(value as string, sessionToken());
+  if (!value) return false;
+  const [expiryText, mac] = value.split(".");
+  const expiresAt = Number(expiryText);
+  if (!Number.isFinite(expiresAt) || expiresAt < Date.now() || !mac) return false;
+  return safeEqual(mac, sign(expiresAt));
 }
 
 const cookieOptions = {
@@ -41,7 +50,11 @@ const cookieOptions = {
 };
 
 export async function startAdminSession() {
-  (await cookies()).set(COOKIE, sessionToken(), { ...cookieOptions, maxAge: 60 * 60 * 24 * 30 });
+  const expiresAt = Date.now() + SESSION_DAYS * 24 * 60 * 60 * 1000;
+  (await cookies()).set(COOKIE, `${expiresAt}.${sign(expiresAt)}`, {
+    ...cookieOptions,
+    expires: new Date(expiresAt),
+  });
 }
 
 export async function endAdminSession() {

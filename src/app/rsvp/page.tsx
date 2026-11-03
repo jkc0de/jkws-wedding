@@ -3,18 +3,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeftIcon } from "lucide-react";
 import { RsvpForm } from "@/components/site/rsvp-form";
+import { GROOM_FIRST_PARAM, sideFromFlag, withFlag } from "@/lib/names";
 
 export const metadata: Metadata = {
   title: "RSVP",
   description: "Let us know who is coming to our wedding on 23 January 2027.",
 };
 
-export default function RsvpPage() {
+type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
+
+export default async function RsvpPage({ searchParams }: Props) {
+  const groomFirst = GROOM_FIRST_PARAM in (await searchParams);
   return (
     <main className="flex-1 px-4 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-xl">
         <Link
-          href="/"
+          href={withFlag("/", groomFirst)}
           className="mb-10 inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors hover:text-primary"
         >
           <ArrowLeftIcon className="size-4" />
@@ -41,7 +45,7 @@ export default function RsvpPage() {
         </div>
 
         <div className="mt-12">
-          <RsvpForm />
+          <RsvpForm side={sideFromFlag(groomFirst)} />
         </div>
       </div>
     </main>

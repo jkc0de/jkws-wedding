@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element -- ImageResponse renders plain img tags */
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { ImageResponse } from "next/og";

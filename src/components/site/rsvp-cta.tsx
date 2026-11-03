@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Section } from "./section";
 
-export function RsvpCta() {
+export function RsvpCta({ href = "/rsvp" }: { href?: string }) {
   return (
     <Section
       id="rsvp"
@@ -13,7 +13,7 @@ export function RsvpCta() {
     >
       <div className="flex justify-center">
         <Button asChild className="h-12 rounded-full px-10 text-base">
-          <Link href="/rsvp">RSVP now</Link>
+          <Link href={href}>RSVP now</Link>
         </Button>
       </div>
     </Section>

@@ -19,6 +19,7 @@ export async function saveRsvpAsAdmin(_prev: AdminRsvpState, formData: FormData)
   const parsed = rsvpSchema.safeParse({
     fullName: str(formData.get("fullName")),
     attendance: str(formData.get("attendance")),
+    side: str(formData.get("side")),
     guests: str(formData.get("guests"))
       .split("\n")
       .map((g) => g.trim())

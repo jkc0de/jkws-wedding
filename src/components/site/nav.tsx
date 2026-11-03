@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { MusicToggle } from "./music-toggle";
+import { NavRsvpLink } from "./nav-rsvp-link";
 
 const links = [
   { href: "/#details", label: "Details" },
@@ -25,9 +25,7 @@ export function Nav() {
         </nav>
         <div className="flex items-center gap-2">
           <MusicToggle />
-          <Button asChild className="rounded-full px-5">
-            <Link href="/rsvp">RSVP</Link>
-          </Button>
+          <NavRsvpLink />
         </div>
       </div>
       <nav className="flex items-center justify-center gap-8 border-t border-border/60 py-2 text-sm text-muted-foreground md:hidden">

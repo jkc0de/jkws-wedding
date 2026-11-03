@@ -4,7 +4,7 @@ import { Details } from "@/components/site/details";
 import { Gallery } from "@/components/site/gallery";
 import { Faq } from "@/components/site/faq";
 import { RsvpCta } from "@/components/site/rsvp-cta";
-import { coupleNames, coupleTitle, GROOM_FIRST_PARAM } from "@/lib/names";
+import { coupleNames, coupleTitle, GROOM_FIRST_PARAM, withFlag } from "@/lib/names";
 
 type Props = { searchParams: Promise<Record<string, string | string[] | undefined>> };
 
@@ -35,14 +35,15 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 }
 
 export default async function Home({ searchParams }: Props) {
-  const names = coupleNames(await groomFirstFrom(searchParams));
+  const groomFirst = await groomFirstFrom(searchParams);
+  const rsvpHref = withFlag("/rsvp", groomFirst);
   return (
     <main className="flex-1">
-      <Hero names={names} />
+      <Hero names={coupleNames(groomFirst)} rsvpHref={rsvpHref} />
       <Details />
       <Gallery />
       <Faq />
-      <RsvpCta />
+      <RsvpCta href={rsvpHref} />
     </main>
   );
 }
