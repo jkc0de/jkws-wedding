@@ -17,11 +17,11 @@ export default function Icon() {
           background: "#961e2e",
           color: "#fbf6ec",
           fontFamily: "serif",
-          fontSize: 30,
+          fontSize: 26,
           letterSpacing: 1,
         }}
       >
-        JW
+        S&amp;J
       </div>
     ),
     size,
