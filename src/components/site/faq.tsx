@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     q: "What is the dress code?",
-    a: "Formal Attire (Black tie optional). Suits, long dresses and traditional wear are all welcome.",
+    a: "Formal Attire. Suits, long dresses and traditional wear are all welcome.",
   },
   {
     q: "Is there parking at the venue?",
