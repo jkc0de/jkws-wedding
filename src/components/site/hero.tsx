@@ -54,21 +54,15 @@ export function Hero({ names }: { names: [string, string] }) {
             Together with their families
           </p>
 
-          <h1 className="mt-6 text-foreground">
-            <span className="block whitespace-nowrap font-script text-5xl leading-tight sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl">
-              {first}
-            </span>
-            <span className="my-1 block font-serif text-4xl font-light italic leading-none text-primary sm:text-5xl">
-              &amp;
-            </span>
-            <span className="block whitespace-nowrap font-script text-5xl leading-tight sm:text-6xl md:text-6xl lg:text-7xl xl:text-8xl">
-              {second}
-            </span>
+          <h1 className="mt-6 font-serif text-5xl font-light leading-none tracking-tight text-foreground sm:text-6xl md:text-5xl lg:text-6xl xl:text-7xl">
+            <span className="block whitespace-nowrap">{first}</span>
+            <span className="my-2 block italic text-primary">&amp;</span>
+            <span className="block whitespace-nowrap">{second}</span>
           </h1>
 
           <p
             className={cn(
-              "mt-8 font-serif text-2xl sm:text-3xl",
+              "mt-8 font-serif text-3xl sm:text-4xl",
               hasHeroImage ? "text-foreground md:text-foreground/80" : "text-foreground/80",
             )}
           >

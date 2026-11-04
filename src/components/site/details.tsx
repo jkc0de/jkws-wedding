@@ -22,12 +22,15 @@ export function Details() {
       id="details"
       eyebrow="The day"
       title="Wedding Details"
-      intro="Saturday, 23 January 2027"
       className="bg-white"
     >
       <Card className="relative mx-auto max-w-xl border-primary/20 bg-background shadow-[0_30px_60px_-40px_rgba(150,30,46,0.35)]">
         <CardCorners />
         <CardContent className="flex flex-col items-center gap-6 px-8 py-12 text-center sm:px-12">
+          <p className="font-serif text-3xl sm:text-4xl">Saturday, 23 January 2027</p>
+
+          <Separator className="max-w-24" />
+
           <Image
             src="/st-regis-logo.svg"
             alt="St. Regis"
