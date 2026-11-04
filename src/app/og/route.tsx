@@ -21,7 +21,7 @@ const root = process.cwd();
 
 export async function GET(request: NextRequest) {
   const [first, second] = coupleNames(hasGroomFlag(request.nextUrl.searchParams));
-  const [photo, logo, stRegis, light, regular, lightItalic] = await Promise.all([
+  const [photo, logo, stRegis, light, regular, lightItalic, scriptFont] = await Promise.all([
     sharp(path.join(root, "public/hero.jpg"))
       .resize(600, HEIGHT, { fit: "cover", position: "centre" })
       .jpeg({ quality: 88 })
@@ -31,6 +31,7 @@ export async function GET(request: NextRequest) {
     readFile(path.join(root, "src/app/og/cormorant-300.woff")),
     readFile(path.join(root, "src/app/og/cormorant-400.woff")),
     readFile(path.join(root, "src/app/og/cormorant-300-italic.woff")),
+    readFile(path.join(root, "src/app/og/pinyon-script-400.woff")),
   ]);
 
   const png = await new ImageResponse(
@@ -70,12 +71,12 @@ export async function GET(request: NextRequest) {
           >
             Together with their families
           </div>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: 18, fontSize: 68, fontWeight: 300, lineHeight: 1 }}>
-            <span>{first}</span>
-            <span style={{ color: "#961e2e", fontStyle: "italic", fontSize: 54, margin: "6px 0" }}>&amp;</span>
-            <span>{second}</span>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", marginTop: 14, lineHeight: 1.15 }}>
+            <span style={{ fontFamily: "Script", fontSize: 74, whiteSpace: "nowrap" }}>{first}</span>
+            <span style={{ color: "#961e2e", fontStyle: "italic", fontWeight: 300, fontSize: 44, margin: "0 0 2px" }}>&amp;</span>
+            <span style={{ fontFamily: "Script", fontSize: 74, whiteSpace: "nowrap" }}>{second}</span>
           </div>
-          <div style={{ marginTop: 30, fontSize: 32, fontWeight: 400, color: "#5a4a47" }}>Saturday, 23 January 2027</div>
+          <div style={{ marginTop: 24, fontSize: 32, fontWeight: 400, color: "#5a4a47" }}>Saturday, 23 January 2027</div>
           <div style={{ marginTop: 8, fontSize: 15, letterSpacing: 5, color: "#7a6a66", textTransform: "uppercase", fontFamily: "sans-serif" }}>
             The St. Regis Kuala Lumpur
           </div>
@@ -103,6 +104,7 @@ export async function GET(request: NextRequest) {
         { name: "Cormorant", data: light, weight: 300, style: "normal" },
         { name: "Cormorant", data: regular, weight: 400, style: "normal" },
         { name: "Cormorant", data: lightItalic, weight: 300, style: "italic" },
+        { name: "Script", data: scriptFont, weight: 400, style: "normal" },
       ],
     },
   ).arrayBuffer();

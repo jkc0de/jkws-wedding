@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Inter } from "next/font/google";
+import { Cormorant_Garamond, Inter, Pinyon_Script } from "next/font/google";
 import { Toaster } from "@/components/ui/sonner";
 import { Nav } from "@/components/site/nav";
 import { Footer } from "@/components/site/footer";
@@ -15,6 +15,12 @@ const serif = Cormorant_Garamond({
 const sans = Inter({
   variable: "--font-sans",
   subsets: ["latin"],
+});
+
+const script = Pinyon_Script({
+  variable: "--font-script",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -52,7 +58,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" className={`${serif.variable} ${sans.variable} h-full antialiased`}>
+    <html lang="en" className={`${serif.variable} ${sans.variable} ${script.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <Nav />
         {children}
