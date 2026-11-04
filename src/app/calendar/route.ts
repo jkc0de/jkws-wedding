@@ -14,7 +14,7 @@ const ics = [
   "DTEND:20270123T160000Z",
   "SUMMARY:Wong Wai Seun & Jordan Koh's Wedding",
   "LOCATION:The St. Regis Kuala Lumpur\\, No. 6\\, Jalan Stesen Sentral 2\\, 50470 Kuala Lumpur",
-  "DESCRIPTION:Cocktails at 6:00 PM\\, dinner at 7:00 PM\\, after party at 10:30 PM. Dress code: formal.",
+  "DESCRIPTION:Cocktails at 6:00 PM\\, dinner at 7:00 PM\\, after party at 10:30 PM. Dress code: Formal Attire (Black tie optional).",
   "END:VEVENT",
   "END:VCALENDAR",
 ].join("\r\n");

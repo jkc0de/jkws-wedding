@@ -14,7 +14,7 @@ const GOOGLE_CALENDAR_URL =
   "&text=" + encodeURIComponent("Wong Wai Seun & Jordan Koh's Wedding") +
   "&dates=20270123T100000Z/20270123T150000Z" +
   "&location=" + encodeURIComponent("The St. Regis Kuala Lumpur, No. 6, Jalan Stesen Sentral 2, 50470 Kuala Lumpur") +
-  "&details=" + encodeURIComponent("Cocktails at 6:00 PM, dinner at 7:00 PM, after party at 10:30 PM. Dress code: formal.");
+  "&details=" + encodeURIComponent("Cocktails at 6:00 PM, dinner at 7:00 PM, after party at 10:30 PM. Dress code: Formal Attire (Black tie optional).");
 
 export function Details() {
   return (
@@ -71,7 +71,7 @@ export function Details() {
 
           <p className="flex items-center gap-2 text-sm text-muted-foreground">
             <ShirtIcon className="size-4 text-primary" />
-            Dress code: Formal / Black tie optional
+            Dress code: Formal Attire (Black tie optional)
           </p>
 
           <div className="flex flex-col items-center gap-3">
